@@ -83,7 +83,7 @@ typedef NS_ENUM(NSInteger, MQTTSessionError) {
  */
 
 @protocol MQTTSessionDelegate <NSObject>
-
+- (UIApplication*)sharedApplication;
 @optional
 
 /** gets called when a new message was received
@@ -269,8 +269,6 @@ typedef NS_ENUM(NSInteger, MQTTSessionError) {
 - (void)buffered:(MQTTSession *)session
        flowingIn:(NSUInteger)flowingIn
       flowingOut:(NSUInteger)flowingOut;
-
-- (UIApplication*)sharedApplication;
 
 @end
 
