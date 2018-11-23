@@ -83,6 +83,8 @@ typedef NS_ENUM(NSInteger, MQTTSessionError) {
  */
 
 @protocol MQTTSessionDelegate <NSObject>
+
+@required
 - (UIApplication*)sharedApplication;
 @optional
 
