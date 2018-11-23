@@ -24,6 +24,7 @@
 #import "MQTTMessage.h"
 #import "MQTTPersistence.h"
 #import "MQTTTransport.h"
+#import <UIKit/UIKit.h>
 
 @class MQTTSession;
 @class MQTTSSLSecurityPolicy;
@@ -268,6 +269,8 @@ typedef NS_ENUM(NSInteger, MQTTSessionError) {
 - (void)buffered:(MQTTSession *)session
        flowingIn:(NSUInteger)flowingIn
       flowingOut:(NSUInteger)flowingOut;
+
+- (UIApplication*)sharedApplication;
 
 @end
 

@@ -19,9 +19,10 @@
 
 @implementation ForegroundReconnection
 
-- (instancetype)initWithMQTTSessionManager:(MQTTSessionManager *)manager {
+- (instancetype)initWithMQTTSessionManager:(MQTTSessionManager *)manager application:(UIApplication *)application {
     self = [super init];
     self.sessionManager = manager;
+    self.shareApplication = application;
     self.backgroundTask = UIBackgroundTaskInvalid;
     
     NSNotificationCenter *defaultCenter = [NSNotificationCenter defaultCenter];
@@ -61,7 +62,7 @@
     }
     
     __weak typeof(self) weakSelf = self;
-    self.backgroundTask = [[UIApplication sharedApplication] beginBackgroundTaskWithExpirationHandler:^{
+    self.backgroundTask = [self.shareApplication beginBackgroundTaskWithExpirationHandler:^{
         __strong typeof(weakSelf) strongSelf = weakSelf;
         [strongSelf endBackgroundTask];
     }];
@@ -73,7 +74,7 @@
 
 - (void)endBackgroundTask {
     if (self.backgroundTask) {
-        [[UIApplication sharedApplication] endBackgroundTask:self.backgroundTask];
+        [self.shareApplication endBackgroundTask:self.backgroundTask];
         self.backgroundTask = UIBackgroundTaskInvalid;
     }
 }
