@@ -106,7 +106,9 @@
         if (self.session.delegate){
             if([self.session.delegate respondsToSelector:@selector(sharedApplication)]){
                 UIApplication* shareApplication = [self.session.delegate sharedApplication];
-                self.foregroundReconnection = [[ForegroundReconnection alloc] initWithMQTTSessionManager:self application:shareApplication];
+                if (nil != shareApplication){
+                    self.foregroundReconnection = [[ForegroundReconnection alloc] initWithMQTTSessionManager:self application:shareApplication];
+                }
             }
         }
     }
